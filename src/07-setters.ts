@@ -3,13 +3,13 @@ export class MyDate {
 
   constructor(
     public year: number = 1993,
-    public  month: number = 7,
+    private _month: number = 7,
     private _day: number = 9
     ) {}
 
   printFormat(): string {
-    const day = this.addPading(this.day);
-    const month = this.addPading(this.month);
+    const day = this.addPading(this._day);
+    const month = this.addPading(this._month);
     return `${day}/${month}/${this.year}`;
   }
 
@@ -25,7 +25,7 @@ export class MyDate {
       this._day += amount;
     }
     if (type === 'months') {
-      this.month += amount;
+      this._month += amount;
     }
     if (type === 'years') {
       this.year += amount;
@@ -42,20 +42,28 @@ export class MyDate {
     return this.year % 4 === 0;
   }
 
+  get month() {
+    return this._month;
+  }
+
+  set month(newValue: number) {
+    if (newValue >= 1 && newValue <= 12) {
+      this._month = newValue;
+    } else {
+      throw new Error("month out of range");
+    }
+
+
+  }
+
+
 }
 
 const myDate = new MyDate(1993,7,10);
 console.log(myDate.printFormat());
-// console.log(myDate.getDay());
-console.log(myDate.day);
-console.log(myDate.isLeapYear);
+myDate.month = 4;
+console.log(myDate.month);
 
-const myDate2 = new MyDate(2000,7,10);
-console.log(myDate2.isLeapYear);
-
-const myDate3 = new MyDate(2001,7,10);
-console.log(myDate3.isLeapYear);
-
-const myDate4 = new MyDate(2004,7,10);
-console.log(myDate4.isLeapYear);
+myDate.month = 78;
+console.log(myDate.month);
 
