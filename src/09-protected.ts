@@ -1,4 +1,4 @@
-export class Animal {
+export abstract class Animal {  //la palkabra abstract impide crear instancias del objeto padre
   constructor(protected name: string) {} //private no se hereda, protected deja heredar
                                         // protected no deja acceder desde afuera de las clases
   move() {
